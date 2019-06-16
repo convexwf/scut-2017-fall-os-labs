@@ -1,0 +1,18 @@
+cmake_minimum_required(VERSION 2.8)
+project(exp_3)
+
+set(CMAKE_CXX_STANDARD 11)
+set(TARGET_1 find)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../bin)
+set(SOURCE_FILES src/find.cpp)
+include_directories(include)
+find_package(Threads REQUIRED)
+add_executable(${TARGET_1} ${SOURCE_FILES})
+
+if(THREADS_HAVE_PTHREAD_ARG)
+    set_property(${TARGET_1} PROPERTY COMPILE_OPTIONS "-pthread")
+    set_property(${TARGET_1} PROPERTY INTERFACE_COMPILE_OPTIONS "-pthread")
+endif()
+if(CMAKE_THREAD_LIBS_INIT)
+    target_link_libraries(${TARGET_1} "${CMAKE_THREAD_LIBS_INIT}")
+endif()
